@@ -14,12 +14,16 @@ const Register = () => {
     try {
       const res = await API.post("/auth/register", formData);
   
-      if (res.status === 201 || res.data.message?.includes("successfully")) {
+      console.log("REGISTER RESPONSE:", res); // 👈 Add this to inspect
+  
+      if (res.status === 201 && res.data?.message) {
+        setMessage(res.data.message);
+      } else if (res.status === 200 && res.data?.message) {
         setMessage(res.data.message);
       } else {
-        setMessage("Unexpected response.");
+        setMessage("Unexpected response from server.");
       }
-  
+      
     } catch (err) {
       console.error("Register error:", err.response?.data || err.message);
       setMessage(err.response?.data?.message || "Registration failed");
