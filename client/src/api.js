@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: `${process.env.REACT_APP_API_URL}/api`,  // ✅ this uses .env
+  baseURL: "https://safebuy-ecommerce-backend.onrender.com/api", // ✅ PRODUCTION BACKEND
 });
 
 API.interceptors.request.use((req) => {
