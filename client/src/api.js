@@ -1,10 +1,9 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: 'https://safebuy-ecommerce-backend.onrender.com/api',
+  baseURL: `${process.env.REACT_APP_API_URL}/api`,  // ✅ this uses .env
 });
 
-// Add token if available
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
   if (token) {
