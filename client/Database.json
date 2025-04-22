@@ -1,0 +1,11 @@
+{
+  "name": "Soniya Kodipunjula",
+  "email": "soniya@example.com",
+  "password": "$2b$10$CEXAMPLEENCRYPTEDPASSWORDX4ogljEriZ8kVJwvu", 
+  "isVerified": true,
+  "mfaEnabled": true,
+  "mfaCode": null,
+  "mfaExpiry": null,
+  "createdAt": { "$date": "2025-04-15T00:00:00Z" },
+  "updatedAt": { "$date": "2025-04-15T00:00:00Z" }
+}
