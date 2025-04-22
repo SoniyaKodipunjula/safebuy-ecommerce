@@ -12,44 +12,24 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-          console.log("Sending formData:", formData);
-          const res = await API.post("/auth/register", formData);
-          console.log("Response:", res.data);
-          setMessage(res.data.message);
-        } catch (err) {
-          console.error("Register error:", err.response?.data || err.message);
-          setMessage(err.response?.data?.message || "Registration failed");
-        }
-      };
+      const res = await API.post("/auth/register", formData);
+      setMessage(res.data.message);
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+      setMessage(err.response?.data?.message || "Registration failed");
+    }
+  };
 
-    return (
+  return (
     <div style={{ maxWidth: "400px", margin: "auto", padding: "1rem" }}>
       <h2>Create an Account</h2>
       <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        /><br /><br />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        /><br /><br />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        /><br /><br />
+        <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" required />
+        <br /><br />
+        <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
+        <br /><br />
+        <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
+        <br /><br />
         <button type="submit">Register</button>
       </form>
       <p>{message}</p>
