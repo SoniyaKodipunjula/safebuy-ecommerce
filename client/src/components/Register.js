@@ -13,9 +13,15 @@ const Register = () => {
     e.preventDefault();
     try {
       const res = await API.post("/auth/register", formData);
-      setMessage(res.data.message);
+  
+      if (res.status === 201 || res.data.message?.includes("successfully")) {
+        setMessage(res.data.message);
+      } else {
+        setMessage("Unexpected response.");
+      }
+  
     } catch (err) {
-      console.error(err.response?.data || err.message);
+      console.error("Register error:", err.response?.data || err.message);
       setMessage(err.response?.data?.message || "Registration failed");
     }
   };
