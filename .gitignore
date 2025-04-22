@@ -14,3 +14,8 @@ yarn-error.log*
 Thumbs.db
 
 SSH
+.env.*
+dist/
+build/
+*.log
+*.pem
