@@ -47,7 +47,13 @@ exports.registerUser = async (req, res) => {
       text: `Click the link to verify: http://localhost:5000/api/auth/verify/${token}`,
     };
 
-    transporter.sendMail(mailOptions);
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error("❌ OTP Email Error:", error);
+      } else {
+        console.log("✅ OTP Email sent:", info.response);
+      }
+    });
 
     res.status(201).json({
       message: "User registered successfully! Please check your email for verification.",
@@ -67,7 +73,6 @@ exports.loginUser = async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
-
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" });
@@ -82,7 +87,7 @@ exports.loginUser = async (req, res) => {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
-    });
+               });
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
